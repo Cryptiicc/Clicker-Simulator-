@@ -3,7 +3,7 @@ let counter = 0;
 let mainmenu_sound = false;
 
 // play sound function
-const playSound = function(arg, loop) {
+const playSound = function(arg, loop, returnValue) {
     let clickSound = new Audio(arg?.toString());
     let loopSent = loop || false;
 
@@ -12,9 +12,9 @@ const playSound = function(arg, loop) {
         clickSound.play();
         if (loopSent === true) clickSound.loop = true;
 
-        return true;
+        return returnValue(true);
        } catch {
-        return false;
+        return returnValue(false);
        }
     }
 }
@@ -25,7 +25,7 @@ const mainMenu_clicking = async function() {
     document.getElementsByClassName("gamePlay")[0].style.display = "block";
 
     if (mainmenu_sound === false) {
-        playSound("./src/sound/main.mp3", true).then((callback_res) => {
+        playSound("./src/sound/main.mp3", true, (callback_res) => {
             console.log(callback_res)
             mainmenu_sound = callback_res;
         })
@@ -45,7 +45,7 @@ const gamePlay_clicking = async function() {
     }
 
     if (mainmenu_sound === false) {
-        playSound("./src/sound/main.mp3", true).then((callback_res) => {
+        playSound("./src/sound/main.mp3", true, (callback_res) => {
             console.log(callback_res)
             mainmenu_sound = callback_res;
         })
@@ -71,7 +71,7 @@ anti_cheat();
 
 // playing the game music
 setTimeout(async () => {
-    playSound("./src/sound/main.mp3", true).then((callback_res) => {
+    playSound("./src/sound/main.mp3", true, (callback_res) => {
         console.log(callback_res)
         mainmenu_sound = callback_res;
     })
