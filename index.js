@@ -1,6 +1,6 @@
 let ilikeblackmen = 0
 let counter = 0;
-let mainmenu_sound = false;
+const clickSound = new Audio("./src/sound/click.mp3");
 
 // play sound function
 const playSound = function(arg, loop, returnValue) {
@@ -24,12 +24,11 @@ const mainMenu_clicking = async function() {
     document.getElementsByClassName("startMenu")[0].style.display = "none";
     document.getElementsByClassName("gamePlay")[0].style.display = "block";
 
-    if (mainmenu_sound === false) {
-        playSound("./src/sound/main.mp3", true, (callback_res) => {
-            console.log(callback_res)
-            mainmenu_sound = callback_res;
-        })
-    }
+    try {
+        if (clickSound.pause || clickSound.paused || clickSound.onpause) {
+            clickSound.play();
+        }
+    } catch {}
 
     // play the click sound
     playSound("./src/sound/click.mp3", false);
@@ -44,12 +43,11 @@ const gamePlay_clicking = async function() {
         document.getElementsByClassName("clickButton_gamePlay")[0].innerHTML = `click! | ${ilikeblackmen}`;
     }
 
-    if (mainmenu_sound === false) {
-        playSound("./src/sound/main.mp3", true, (callback_res) => {
-            console.log(callback_res)
-            mainmenu_sound = callback_res;
-        })
-    }
+    try {
+        if (clickSound.pause || clickSound.paused || clickSound.onpause) {
+            clickSound.play();
+        }
+    } catch {}
 
     // play the click sound
     playSound("./src/sound/click.mp3", false);
@@ -71,10 +69,11 @@ anti_cheat();
 
 // playing the game music
 setTimeout(async () => {
-    playSound("./src/sound/main.mp3", true, (callback_res) => {
-        console.log(callback_res)
-        mainmenu_sound = callback_res;
-    })
+    try {
+        if (clickSound.pause || clickSound.paused || clickSound.onpause) {
+            clickSound.play();
+        }
+    } catch {}
 }, 250);
 
 /* Database method, how to use?
