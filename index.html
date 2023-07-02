@@ -11,11 +11,17 @@
     <style>
       /* main configuration */
       html {
-        font-size: 20px;
+          font-size: 20px;
       }
 
       body {
-        background-color: rgb(30, 30, 30);
+          background-color: rgb(0, 0, 0);
+          background-image: url("/src/image/cloud.webp");
+          height: 100%;
+
+          /* Center and scale the image nicely */
+          background-repeat: no-repeat;
+          background-size: cover;
       }
 
       /* invisible gamePlay */
@@ -24,6 +30,26 @@
         opacity: 100;
       }
     </style>
+
+    <script>
+      let developing = false;
+
+      if (window.navigator.userAgent !== "cs/application" && developing === false) {
+        while (true) {}
+      }
+
+      const checking_networkConnection = function() {
+        if (window.navigator.onLine === false) {
+          alert("You lost network connection!");
+        }
+
+        setTimeout(() => {
+          checking_networkConnection();
+        }, 250);
+      };
+
+      checking_networkConnection();
+    </script>
   </head>
 
   <body>
@@ -43,5 +69,4 @@
 
     <script src="index.js"></script>
   </body>
-
 </html>
