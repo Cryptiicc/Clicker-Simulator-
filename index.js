@@ -25,8 +25,10 @@ const mainMenu_clicking = async function() {
     document.getElementsByClassName("gamePlay")[0].style.display = "block";
 
     if (mainmenu_sound === false) {
-        const callback_ = await playSound("./src/sound/main.mp3", true);
-        mainmenu_sound = callback_;
+        playSound("./src/sound/main.mp3", true).then((callback_res) => {
+            console.log(callback_res)
+            mainmenu_sound = callback_res;
+        })
     }
 
     // play the click sound
@@ -43,9 +45,10 @@ const gamePlay_clicking = async function() {
     }
 
     if (mainmenu_sound === false) {
-        const callback_ = await playSound("./src/sound/main.mp3", true);
-    
-        mainmenu_sound = callback_;
+        playSound("./src/sound/main.mp3", true).then((callback_res) => {
+            console.log(callback_res)
+            mainmenu_sound = callback_res;
+        })
     }
 
     // play the click sound
@@ -68,9 +71,10 @@ anti_cheat();
 
 // playing the game music
 setTimeout(async () => {
-    const callback_ = await playSound("./src/sound/main.mp3", true);
-    
-    mainmenu_sound = callback_ || false;
+    playSound("./src/sound/main.mp3", true).then((callback_res) => {
+        console.log(callback_res)
+        mainmenu_sound = callback_res;
+    })
 }, 250);
 
 /* Database method, how to use?
