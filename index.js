@@ -3,7 +3,7 @@ let counter = 0;
 const clickSound = new Audio("./src/sound/click.mp3");
 
 // play sound function
-const playSound = function(arg, loop, returnValue) {
+const playSound = function(arg, loop) {
     let clickSound = new Audio(arg?.toString());
     let loopSent = loop || false;
 
@@ -12,9 +12,9 @@ const playSound = function(arg, loop, returnValue) {
         clickSound.play();
         if (loopSent === true) clickSound.loop = true;
 
-        return returnValue(true);
+        return true
        } catch {
-        return returnValue(false);
+        return false
        }
     }
 }
