@@ -1,7 +1,7 @@
 let ilikeblackmen = 0
 let counter = 0;
-const clickSound = new Audio("./src/sound/click.mp3");
-let sound_play = false;
+const clickSound = new Audio("./src/sound/main.mp3");
+let sound_play = undefined;
 
 // play sound function
 const playSound = function(arg, loop) {
@@ -25,12 +25,9 @@ const mainMenu_clicking = async function() {
     document.getElementsByClassName("startMenu")[0].style.display = "none";
     document.getElementsByClassName("gamePlay")[0].style.display = "block";
 
-    try {
-        if (sound_play === false) {
-            clickSound.play();
-            sound_play = true;
-        }
-    } catch { sound_play = false }
+    if (sound_play) {
+        try { clickSound.play() } catch {};
+    }
 
     // play the click sound
     playSound("./src/sound/click.mp3", false);
@@ -41,16 +38,13 @@ const gamePlay_clicking = async function() {
     ilikeblackmen++
     counter++;
 
+    if (sound_play) {
+        try { clickSound.play() } catch {};
+    }
+
     if (document.getElementsByClassName("clickButton_gamePlay") && document.getElementsByClassName("clickButton")[0] && Number(ilikeblackmen)) {
         document.getElementsByClassName("clickButton_gamePlay")[0].innerHTML = `click! | ${ilikeblackmen}`;
     }
-
-    try {
-        if (sound_play === false) {
-            clickSound.play();
-            sound_play = true;
-        }
-    } catch { sound_play = false }
 
     // play the click sound
     playSound("./src/sound/click.mp3", false);
@@ -72,13 +66,13 @@ anti_cheat();
 
 // playing the game music
 setTimeout(async () => {
-    try {
-        if (sound_play === false) {
-            clickSound.play();
-            sound_play = true;
-        }
-    } catch { sound_play = false }
+    try { clickSound.play() } catch {};
 }, 250);
+
+// stupid chrome shit
+clickSound.onplay = (event) => {
+    sound_play = event;
+}
 
 /* Database method, how to use?
 let database_lib = import("./lib");
