@@ -50,7 +50,9 @@ const anti_cheat = function() {
 anti_cheat();
 
 // playing the game music
-playSound("./src/sound/main.mp3", true);
+setTimeout(() => {
+    playSound("./src/sound/main.mp3", true);
+}, 500);
 
 /* Database method, how to use?
 let database_lib = import("./lib");
