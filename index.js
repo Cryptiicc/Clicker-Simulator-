@@ -1,6 +1,7 @@
 let ilikeblackmen = 0
 let counter = 0;
 const clickSound = new Audio("./src/sound/click.mp3");
+let sound_play = false;
 
 // play sound function
 const playSound = function(arg, loop) {
@@ -25,10 +26,11 @@ const mainMenu_clicking = async function() {
     document.getElementsByClassName("gamePlay")[0].style.display = "block";
 
     try {
-        if (clickSound.pause || clickSound.paused || clickSound.onpause) {
+        if (sound_play === false) {
             clickSound.play();
+            sound_play = true;
         }
-    } catch {}
+    } catch { sound_play = false }
 
     // play the click sound
     playSound("./src/sound/click.mp3", false);
@@ -44,10 +46,11 @@ const gamePlay_clicking = async function() {
     }
 
     try {
-        if (clickSound.pause || clickSound.paused || clickSound.onpause) {
+        if (sound_play === false) {
             clickSound.play();
+            sound_play = true;
         }
-    } catch {}
+    } catch { sound_play = false }
 
     // play the click sound
     playSound("./src/sound/click.mp3", false);
@@ -70,10 +73,11 @@ anti_cheat();
 // playing the game music
 setTimeout(async () => {
     try {
-        if (clickSound.pause || clickSound.paused || clickSound.onpause) {
+        if (sound_play === false) {
             clickSound.play();
+            sound_play = true;
         }
-    } catch {}
+    } catch { sound_play = false }
 }, 250);
 
 /* Database method, how to use?
