@@ -10,7 +10,6 @@ const playSound = function(arg, loop) {
     if (clickSound) {
        try {
         clickSound.play();
-
         if (loopSent === true) clickSound.loop = true;
 
         return true;
@@ -27,7 +26,6 @@ const mainMenu_clicking = async function() {
 
     if (mainmenu_sound === false) {
         const callback_ = await playSound("./src/sound/main.mp3", true);
-    
         mainmenu_sound = callback_;
     }
 
@@ -72,8 +70,8 @@ anti_cheat();
 setTimeout(async () => {
     const callback_ = await playSound("./src/sound/main.mp3", true);
     
-    mainmenu_sound = callback_;
-}, 1000);
+    mainmenu_sound = callback_ || false;
+}, 250);
 
 /* Database method, how to use?
 let database_lib = import("./lib");
