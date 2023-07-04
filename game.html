@@ -52,6 +52,12 @@
       checking_networkConnection();
       */
 
+      // Cookie logging
+      if (!document.cookie.includes("cookie=")) {
+        window.location.href = "/index.html";
+      }
+      
+      // Network connection check
       const checking_networkConnection = function() {
         if (window.navigator.onLine === false) {
           alert("You lost network connection!");

@@ -120,20 +120,55 @@
             </style>
 
             <script>
+                // Checking if logged in
+                if (document.cookie.includes("cookie=")) {
+                    window.location.href = "/game.html";
+                }
+
                 // Login button pressed
                 const login = function() {
                     try {
-                        const database_lib = import("./lib.js");
+                        if (document.getElementsByClassName("h-captcha") && document.getElementsByClassName("h-captcha")[0]) {
+                            if (document.getElementsByClassName("h-captcha")[0].children[0].getAttribute("data-hcaptcha-response") !== "") {
+                                const hcaptcha_key = document.getElementsByClassName("h-captcha")[0].children[0].getAttribute("data-hcaptcha-response") || "";
 
-                        let username = document.getElementsByClassName("username_box")[0].value;
-                        let email = document.getElementsByClassName("email_box")[0].value;
-                        let passwd = document.getElementsByClassName("passwd_box")[0].value;
+                                let username = document.getElementsByClassName("username_box")[0].value;
+                                let email = document.getElementsByClassName("email_box")[0].value;
+                                let passwd = document.getElementsByClassName("passwd_box")[0].value;
 
-                        database_lib.then((func) => {
-                            fetch("https://backend-clickersim.netlify.app/", { method: "POST", body: JSON.stringify({ "username": username, "email": email, "password": passwd }) });
-                        })
+                                fetch("http://localhost:3000/signin", { method: "POST", mode: 'cors', headers: { "Accept": "application/json", "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }, body: JSON.stringify({ "hcaptcha": hcaptcha_key?.toString(), "request": { "username": username, "email": btoa(btoa(btoa(email))), "password": btoa(btoa(btoa(passwd))) }}) }).then((res) => res.json()).then((res_json) => {
+                                    if (res_json && res_json["status"] === true && res_json["data"] && res_json["data"]["cookie"] && res_json["data"]["username"]) {
+                                        document.cookie = `cookie=${JSON.stringify({ "WARNING_DO_NOT_COPY_OR_SHARE_THESE_TO_OTHERS_OR_ELSE_YOUR_ACCOUNT_WILL_GET_HACKED_BECAREFUL_YOU_MAY_GIVE_ATTACKER_ACCESS_TO_YOUR_ACCOUNT": 0, "username": res_json["data"]["username"], "loginCookie": res_json["data"]["cookie"] })}`
+                                        window.location.href = "/game.html";
+                                    }
+                                })
+                            }
+                        }
                     } catch {}
                 }
+
+                // button blur out
+                const button_blurout = function() {
+                    try {
+                        if (document.getElementsByClassName("h-captcha") && document.getElementsByClassName("h-captcha")[0]) {
+                            if (document.getElementsByClassName("h-captcha")[0].children[0].getAttribute("data-hcaptcha-response") === "") {
+                                if (document.getElementsByClassName("submit_content")[0]) {
+                                    document.getElementsByClassName("submit_content")[0].style.background = "rgba(0, 255, 191, 0.511)"
+                                }
+                            } else if (document.getElementsByClassName("h-captcha")[0].children[0].getAttribute("data-hcaptcha-response") !== "") {
+                                if (document.getElementsByClassName("submit_content")[0]) {
+                                    document.getElementsByClassName("submit_content")[0].style.background = "rgb(0, 255, 191)"
+                                }
+                            }
+                        }
+                    } catch {}
+
+                    setTimeout(() => {
+                        button_blurout();
+                    }, 250);
+                }
+
+                button_blurout();
 
                 // network connection
                 const checking_networkConnection = function() {
