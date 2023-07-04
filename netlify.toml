@@ -1,11 +1,10 @@
 [build]
   command = "CI = npm run build"
-  commandOrigin: config
-  [environment]:
-    - CI
-    - authkey
-    - authkey
-    - secret
+
+[build.environment]
+  CI = false
+  authkey = ""
+  secret = ""
 
 [functions]
   external_node_modules = ["express"]
