@@ -60,14 +60,14 @@ const anti_cheat = function() {
 anti_cheat();
 
 // Getting last play data
-fetch("https://backend-buttonfrenzy.netlify.app/getClick", { method: "POST", mode: 'cors', headers: { "Accept": "application/json", "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }, body: JSON.stringify({ "username": JSON.parse(document.cookie.split("cookie=")[1])["username"] }) }).then((res) => res.json()).then((res_json) => {
+fetch("https://backend-buttonfrenzy.vercel.app/getClick", { method: "POST", mode: 'cors', headers: { "Accept": "application/json", "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }, body: JSON.stringify({ "username": JSON.parse(document.cookie.split("cookie=")[1])["username"] }) }).then((res) => res.json()).then((res_json) => {
     if (res_json && res_json["status"] === true && res_json["data"] && res_json["data"]["click"]) {
         ilikeblackmen = Number(res_json["data"]["click"]);
         lastClick_save = 0;
     }
 })
 setTimeout(() => {
-    fetch("https://backend-buttonfrenzy.netlify.app/getClick", { method: "POST", mode: 'cors', headers: { "Accept": "application/json", "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }, body: JSON.stringify({ "username": JSON.parse(document.cookie.split("cookie=")[1])["username"] }) }).then((res) => res.json()).then((res_json) => {
+    fetch("https://backend-buttonfrenzy.vercel.app/getClick", { method: "POST", mode: 'cors', headers: { "Accept": "application/json", "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }, body: JSON.stringify({ "username": JSON.parse(document.cookie.split("cookie=")[1])["username"] }) }).then((res) => res.json()).then((res_json) => {
         if (res_json && res_json["status"] === true && res_json["data"] && res_json["data"]["click"]) {
             ilikeblackmen = Number(res_json["data"]["click"]);
             allowCatching = true;
@@ -79,7 +79,7 @@ setTimeout(() => {
 // Saving data
 const savingData = function() {
     allowCatching = false;
-    fetch("https://backend-buttonfrenzy.netlify.app/postClick", { method: "POST", mode: 'cors', headers: { "Accept": "application/json", "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }, body: JSON.stringify({ "username": JSON.parse(document.cookie.split("cookie=")[1])["username"], "cookie": JSON.parse(document.cookie.split("cookie=")[1])["loginCookie"], "clicked": lastClick_save }) }).then((res) => res.json()).then((res_json) => {
+    fetch("https://backend-buttonfrenzy.vercel.app/postClick", { method: "POST", mode: 'cors', headers: { "Accept": "application/json", "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }, body: JSON.stringify({ "username": JSON.parse(document.cookie.split("cookie=")[1])["username"], "cookie": JSON.parse(document.cookie.split("cookie=")[1])["loginCookie"], "clicked": lastClick_save }) }).then((res) => res.json()).then((res_json) => {
         if (res_json && res_json["status"] === true && res_json["data"] && res_json["data"]["click"]) {
             ilikeblackmen = Number(res_json["click"]);
             allowCatching = true;
@@ -97,7 +97,7 @@ savingData();
 // Leaving page detector
 window.onbeforeunload = function(event) {
     allowCatching = false;
-    fetch("https://backend-buttonfrenzy.netlify.app/postClick", { method: "POST", mode: 'cors', headers: { "Accept": "application/json", "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }, body: JSON.stringify({ "username": JSON.parse(document.cookie.split("cookie=")[1])["username"], "cookie": JSON.parse(document.cookie.split("cookie=")[1])["loginCookie"], "clicked": lastClick_save }) }).then((res) => res.json()).then((res_json) => {
+    fetch("https://backend-buttonfrenzy.vercel.app/postClick", { method: "POST", mode: 'cors', headers: { "Accept": "application/json", "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }, body: JSON.stringify({ "username": JSON.parse(document.cookie.split("cookie=")[1])["username"], "cookie": JSON.parse(document.cookie.split("cookie=")[1])["loginCookie"], "clicked": lastClick_save }) }).then((res) => res.json()).then((res_json) => {
         if (res_json && res_json["status"] === true && res_json["data"] && res_json["data"]["click"]) {
             ilikeblackmen = Number(res_json["data"]["click"]);
             allowCatching = true;
