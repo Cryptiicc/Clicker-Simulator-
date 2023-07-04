@@ -3,7 +3,7 @@
   publish = "public"
 
 [context.production]
-  environment = { CI = false }
+  environment = { CI = "npm run build" }
 
 [functions]
   external_node_modules = ["express"]
