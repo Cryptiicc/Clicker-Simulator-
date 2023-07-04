@@ -174,6 +174,6 @@ app.post("/postClick", (req, res) => {
             status: false,
             data: {},
             message: "missing_data"
-        })
+        });
     }
 })
