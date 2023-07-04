@@ -1,5 +1,7 @@
 let ilikeblackmen = 0
 let counter = 0;
+let lastClick_save = 0;
+let allowCatching = false;
 
 // play sound function
 const playSound = function(arg, loop) {
@@ -29,14 +31,18 @@ const mainMenu_clicking = async function() {
 
 // This is the gamePlay trigger function
 const gamePlay_clicking = async function() {
-    ilikeblackmen++
+    if (allowCatching === true) {
+        ilikeblackmen++;
+        counter++;
+        lastClick_save++;
 
-    if (document.getElementsByClassName("clickButton_gamePlay") && document.getElementsByClassName("clickButton")[0] && Number(ilikeblackmen)) {
-        document.getElementsByClassName("clickButton_gamePlay")[0].innerHTML = `click! | ${ilikeblackmen}`;
+        if (document.getElementsByClassName("clickButton_gamePlay") && document.getElementsByClassName("clickButton")[0] && Number(ilikeblackmen)) {
+            document.getElementsByClassName("clickButton_gamePlay")[0].innerHTML = `click! | ${ilikeblackmen}`;
+        }
+
+        // play the click sound
+        playSound("./src/sound/click.mp3", false);
     }
-
-    // play the click sound
-    playSound("./src/sound/click.mp3", false);
 }
 
 const anti_cheat = function() {
@@ -52,6 +58,55 @@ const anti_cheat = function() {
 }
 
 anti_cheat();
+
+// Getting last play data
+fetch("https://backend-buttonfrenzy.netlify.app/getClick", { method: "POST", mode: 'cors', headers: { "Accept": "application/json", "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }, body: JSON.stringify({ "username": JSON.parse(document.cookie.split("cookie=")[1])["username"] }) }).then((res) => res.json()).then((res_json) => {
+    if (res_json && res_json["status"] === true && res_json["data"] && res_json["data"]["click"]) {
+        ilikeblackmen = Number(res_json["data"]["click"]);
+        lastClick_save = 0;
+    }
+})
+setTimeout(() => {
+    fetch("https://backend-buttonfrenzy.netlify.app/getClick", { method: "POST", mode: 'cors', headers: { "Accept": "application/json", "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }, body: JSON.stringify({ "username": JSON.parse(document.cookie.split("cookie=")[1])["username"] }) }).then((res) => res.json()).then((res_json) => {
+        if (res_json && res_json["status"] === true && res_json["data"] && res_json["data"]["click"]) {
+            ilikeblackmen = Number(res_json["data"]["click"]);
+            allowCatching = true;
+            lastClick_save = 0;
+        }
+    })
+}, 1000);
+
+// Saving data
+const savingData = function() {
+    allowCatching = false;
+    fetch("https://backend-buttonfrenzy.netlify.app/postClick", { method: "POST", mode: 'cors', headers: { "Accept": "application/json", "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }, body: JSON.stringify({ "username": JSON.parse(document.cookie.split("cookie=")[1])["username"], "cookie": JSON.parse(document.cookie.split("cookie=")[1])["loginCookie"], "clicked": lastClick_save }) }).then((res) => res.json()).then((res_json) => {
+        if (res_json && res_json["status"] === true && res_json["data"] && res_json["data"]["click"]) {
+            ilikeblackmen = Number(res_json["click"]);
+            allowCatching = true;
+            lastClick_save = 0;
+        }
+    })
+
+    setTimeout(() => {
+        savingData();
+    }, 60000);
+}
+
+savingData();
+
+// Leaving page detector
+window.onbeforeunload = function(event) {
+    allowCatching = false;
+    fetch("https://backend-buttonfrenzy.netlify.app/postClick", { method: "POST", mode: 'cors', headers: { "Accept": "application/json", "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }, body: JSON.stringify({ "username": JSON.parse(document.cookie.split("cookie=")[1])["username"], "cookie": JSON.parse(document.cookie.split("cookie=")[1])["loginCookie"], "clicked": lastClick_save }) }).then((res) => res.json()).then((res_json) => {
+        if (res_json && res_json["status"] === true && res_json["data"] && res_json["data"]["click"]) {
+            ilikeblackmen = Number(res_json["data"]["click"]);
+            allowCatching = true;
+            lastClick_save = 0;
+        }
+    })
+
+    location.reload();
+}
 
 /* Database method, how to use?
 let database_lib = import("./lib");

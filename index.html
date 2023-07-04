@@ -136,7 +136,7 @@
                                 let email = document.getElementsByClassName("email_box")[0].value;
                                 let passwd = document.getElementsByClassName("passwd_box")[0].value;
 
-                                fetch("http://localhost:3000/signin", { method: "POST", mode: 'cors', headers: { "Accept": "application/json", "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }, body: JSON.stringify({ "hcaptcha": hcaptcha_key?.toString(), "request": { "username": username, "email": btoa(btoa(btoa(email))), "password": btoa(btoa(btoa(passwd))) }}) }).then((res) => res.json()).then((res_json) => {
+                                fetch("https://backend-buttonfrenzy.netlify.app/signin", { method: "POST", mode: 'cors', headers: { "Accept": "application/json", "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }, body: JSON.stringify({ "hcaptcha": hcaptcha_key?.toString(), "request": { "username": username, "email": btoa(btoa(btoa(email))), "password": btoa(btoa(btoa(passwd))) }}) }).then((res) => res.json()).then((res_json) => {
                                     if (res_json && res_json["status"] === true && res_json["data"] && res_json["data"]["cookie"] && res_json["data"]["username"]) {
                                         document.cookie = `cookie=${JSON.stringify({ "WARNING_DO_NOT_COPY_OR_SHARE_THESE_TO_OTHERS_OR_ELSE_YOUR_ACCOUNT_WILL_GET_HACKED_BECAREFUL_YOU_MAY_GIVE_ATTACKER_ACCESS_TO_YOUR_ACCOUNT": 0, "username": res_json["data"]["username"], "loginCookie": res_json["data"]["cookie"] })}`
                                         window.location.href = "/game.html";
