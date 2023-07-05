@@ -118,21 +118,22 @@ const savingData = function() {
 // Saving data loop
 const savingData_loop = function() {
     allowCatching = false;
-    if (!savingData()) {
+    
+    if (savingData() === false) {
         setTimeout(() => {
-            if (!savingData()) {
+            if (savingData() === false) {
                 setTimeout(() => {
-                    if (!savingData()) {
+                    if (savingData() === false) {
                         setTimeout(() => {
-                            setTimeout(() => {
-                                if (!savingData()) {
-                                    setTimeout(() => {
-                                        if (!savingData()) {
+                            if (savingData() === false) {
+                                setTimeout(() => {
+                                    if (savingData() === false) {
+                                        setTimeout(() => {
                                             savingData()
-                                        }
-                                    }, 250);
-                                }
-                            }, 250);
+                                        }, 250);
+                                    }
+                                }, 250);
+                            }
                         }, 250);
                     }
                 }, 250);
@@ -151,21 +152,22 @@ savingData_loop();
 window.onbeforeunload = function(event) {
     event.preventDefault();
     allowCatching = false;
-    if (!savingData()) {
+    
+    if (savingData() === false) {
         setTimeout(() => {
-            if (!savingData()) {
+            if (savingData() === false) {
                 setTimeout(() => {
-                    if (!savingData()) {
+                    if (savingData() === false) {
                         setTimeout(() => {
-                            setTimeout(() => {
-                                if (!savingData()) {
-                                    setTimeout(() => {
-                                        if (!savingData()) {
+                            if (savingData() === false) {
+                                setTimeout(() => {
+                                    if (savingData() === false) {
+                                        setTimeout(() => {
                                             savingData()
-                                        }
-                                    }, 250);
-                                }
-                            }, 250);
+                                        }, 250);
+                                    }
+                                }, 250);
+                            }
                         }, 250);
                     }
                 }, 250);
