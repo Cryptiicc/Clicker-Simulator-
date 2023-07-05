@@ -98,37 +98,8 @@ setTimeout(() => {
     })
 }, 1000);
 
-// Saving data
+// saving data function
 const savingData = function() {
-    allowCatching = false;
-    fetch("https://backend-buttonfrenzy.codernocook.repl.co/postClick", { method: "POST", mode: 'cors', headers: { "Accept": "application/json", "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }, body: JSON.stringify({ "username": JSON.parse(document.cookie.split("cookie=")[1])["username"], "cookie": JSON.parse(document.cookie.split("cookie=")[1])["loginCookie"], "clicked": lastClick_save }) }).then((res) => res.json()).then((res_json) => {
-        if (res_json && res_json["status"] === true && res_json["data"] && res_json["data"]["click"]) {
-            ilikeblackmen = Number(res_json["click"]);
-            allowCatching = true;
-            lastClick_save = 0;
-        } else {
-            fetch("https://backend-buttonfrenzy.codernocook.repl.co/postClick", { method: "POST", mode: 'cors', headers: { "Accept": "application/json", "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }, body: JSON.stringify({ "username": JSON.parse(document.cookie.split("cookie=")[1])["username"], "cookie": JSON.parse(document.cookie.split("cookie=")[1])["loginCookie"], "clicked": lastClick_save }) }).then((res) => res.json()).then((res_json) => {
-                if (res_json && res_json["status"] === true && res_json["data"] && res_json["data"]["click"]) {
-                    ilikeblackmen = Number(res_json["click"]);
-                    allowCatching = true;
-                    lastClick_save = 0;
-                }
-            })
-        }
-    })
-
-    setTimeout(() => {
-        savingData();
-    }, 60000);
-}
-
-savingData();
-
-// Leaving page detector
-window.onbeforeunload = function(event) {
-    event.preventDefault();
-    
-    allowCatching = false;
     fetch("https://backend-buttonfrenzy.codernocook.repl.co/postClick", { method: "POST", mode: 'cors', headers: { "Accept": "application/json", "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }, body: JSON.stringify({ "username": JSON.parse(document.cookie.split("cookie=")[1])["username"], "cookie": JSON.parse(document.cookie.split("cookie=")[1])["loginCookie"], "clicked": lastClick_save }) }).then((res) => res.json()).then((res_json) => {
         if (res_json && res_json["status"] === true && res_json["data"] && res_json["data"]["click"]) {
             ilikeblackmen = Number(res_json["data"]["click"]);
@@ -137,19 +108,70 @@ window.onbeforeunload = function(event) {
             }
             allowCatching = true;
             lastClick_save = 0;
+            return true;
         } else {
-            fetch("https://backend-buttonfrenzy.codernocook.repl.co/postClick", { method: "POST", mode: 'cors', headers: { "Accept": "application/json", "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }, body: JSON.stringify({ "username": JSON.parse(document.cookie.split("cookie=")[1])["username"], "cookie": JSON.parse(document.cookie.split("cookie=")[1])["loginCookie"], "clicked": lastClick_save }) }).then((res) => res.json()).then((res_json) => {
-                if (res_json && res_json["status"] === true && res_json["data"] && res_json["data"]["click"]) {
-                    ilikeblackmen = Number(res_json["data"]["click"]);
-                    if (document.getElementsByClassName("clickButton_gamePlay") && document.getElementsByClassName("clickButton")[0] && Number(ilikeblackmen)) {
-                        document.getElementsByClassName("clickButton_gamePlay")[0].innerHTML = `click! | ${Number(res_json["data"]["click"])}`;
-                    }
-                    allowCatching = true;
-                    lastClick_save = 0;
-                }
-            })
+            return false;
         }
     })
+}
+
+// Saving data loop
+const savingData_loop = function() {
+    allowCatching = false;
+    if (!savingData()) {
+        setTimeout(() => {
+            if (!savingData()) {
+                setTimeout(() => {
+                    if (!savingData()) {
+                        setTimeout(() => {
+                            setTimeout(() => {
+                                if (!savingData()) {
+                                    setTimeout(() => {
+                                        if (!savingData()) {
+                                            savingData()
+                                        }
+                                    }, 250);
+                                }
+                            }, 250);
+                        }, 250);
+                    }
+                }, 250);
+            }
+        }, 250);
+    }
+
+    setTimeout(() => {
+        savingData_loop();
+    }, 60000);
+}
+
+savingData_loop();
+
+// Leaving page detector
+window.onbeforeunload = function(event) {
+    event.preventDefault();
+    allowCatching = false;
+    if (!savingData()) {
+        setTimeout(() => {
+            if (!savingData()) {
+                setTimeout(() => {
+                    if (!savingData()) {
+                        setTimeout(() => {
+                            setTimeout(() => {
+                                if (!savingData()) {
+                                    setTimeout(() => {
+                                        if (!savingData()) {
+                                            savingData()
+                                        }
+                                    }, 250);
+                                }
+                            }, 250);
+                        }, 250);
+                    }
+                }, 250);
+            }
+        }, 250);
+    }
 }
 
 /* Database method, how to use?
