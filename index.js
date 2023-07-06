@@ -61,7 +61,7 @@ anti_cheat();
 
 // Getting last play data
 fetch("https://backend-buttonfrenzy.codernocook.repl.co/getClick", { method: "POST", mode: 'cors', headers: { "Accept": "application/json", "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }, body: JSON.stringify({ "username": JSON.parse(document.cookie.split("cookie=")[1])["username"] }) }).then((res) => res.json()).then((res_json) => {
-    if (res_json && res_json["status"] === true && res_json["data"] && res_json["data"]["click"]) {
+    if (res_json && res_json["status"] === true && res_json["data"] && res_json["data"]["click"] !== null && res_json["data"]["click"] !== undefined) {
         ilikeblackmen = Number(res_json["data"]["click"]);
         if (document.getElementsByClassName("clickButton_gamePlay") && document.getElementsByClassName("clickButton")[0] && Number(ilikeblackmen)) {
             document.getElementsByClassName("clickButton_gamePlay")[0].innerHTML = `click! | ${Number(res_json["data"]["click"])}`;
@@ -69,7 +69,7 @@ fetch("https://backend-buttonfrenzy.codernocook.repl.co/getClick", { method: "PO
         lastClick_save = 0;
     } else {
         fetch("https://backend-buttonfrenzy.codernocook.repl.co/getClick", { method: "POST", mode: 'cors', headers: { "Accept": "application/json", "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }, body: JSON.stringify({ "username": JSON.parse(document.cookie.split("cookie=")[1])["username"] }) }).then((res) => res.json()).then((res_json) => {
-            if (res_json && res_json["status"] === true && res_json["data"] && res_json["data"]["click"]) {
+            if (res_json && res_json["status"] === true && res_json["data"] && res_json["data"]["click"] !== null && res_json["data"]["click"] !== undefined) {
                 ilikeblackmen = Number(res_json["data"]["click"]);
                 if (document.getElementsByClassName("clickButton_gamePlay") && document.getElementsByClassName("clickButton")[0] && Number(ilikeblackmen)) {
                     document.getElementsByClassName("clickButton_gamePlay")[0].innerHTML = `click! | ${Number(res_json["data"]["click"])}`;
@@ -77,7 +77,7 @@ fetch("https://backend-buttonfrenzy.codernocook.repl.co/getClick", { method: "PO
                 lastClick_save = 0;
             } else {
                 fetch("https://backend-buttonfrenzy.codernocook.repl.co/getClick", { method: "POST", mode: 'cors', headers: { "Accept": "application/json", "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }, body: JSON.stringify({ "username": JSON.parse(document.cookie.split("cookie=")[1])["username"] }) }).then((res) => res.json()).then((res_json) => {
-                    if (res_json && res_json["status"] === true && res_json["data"] && res_json["data"]["click"]) {
+                    if (res_json && res_json["status"] === true && res_json["data"] && res_json["data"]["click"] !== null && res_json["data"]["click"] !== undefined) {
                         ilikeblackmen = Number(res_json["data"]["click"]);
                         if (document.getElementsByClassName("clickButton_gamePlay") && document.getElementsByClassName("clickButton")[0] && Number(ilikeblackmen)) {
                             document.getElementsByClassName("clickButton_gamePlay")[0].innerHTML = `click! | ${Number(res_json["data"]["click"])}`;
@@ -92,48 +92,48 @@ fetch("https://backend-buttonfrenzy.codernocook.repl.co/getClick", { method: "PO
 
 setTimeout(() => {
     fetch("https://backend-buttonfrenzy.codernocook.repl.co/getClick", { method: "POST", mode: 'cors', headers: { "Accept": "application/json", "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }, body: JSON.stringify({ "username": JSON.parse(document.cookie.split("cookie=")[1])["username"] }) }).then((res) => res.json()).then((res_json) => {
-        if (res_json && res_json["status"] === true && res_json["data"] && res_json["data"]["click"]) {
+        if (res_json && res_json["status"] === true && res_json["data"] && res_json["data"]["click"] !== null && res_json["data"]["click"] !== undefined) {
             ilikeblackmen = Number(res_json["data"]["click"]);
             allowCatching = true;
             lastClick_save = 0;
         } else {
             fetch("https://backend-buttonfrenzy.codernocook.repl.co/getClick", { method: "POST", mode: 'cors', headers: { "Accept": "application/json", "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }, body: JSON.stringify({ "username": JSON.parse(document.cookie.split("cookie=")[1])["username"] }) }).then((res) => res.json()).then((res_json) => {
-                if (res_json && res_json["status"] === true && res_json["data"] && res_json["data"]["click"]) {
+                if (res_json && res_json["status"] === true && res_json["data"] && res_json["data"]["click"] !== null && res_json["data"]["click"] !== undefined) {
                     ilikeblackmen = Number(res_json["data"]["click"]);
                     allowCatching = true;
                     lastClick_save = 0;
                 } else {
                     setTimeout(() => {
                         fetch("https://backend-buttonfrenzy.codernocook.repl.co/getClick", { method: "POST", mode: 'cors', headers: { "Accept": "application/json", "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }, body: JSON.stringify({ "username": JSON.parse(document.cookie.split("cookie=")[1])["username"] }) }).then((res) => res.json()).then((res_json) => {
-                            if (res_json && res_json["status"] === true && res_json["data"] && res_json["data"]["click"]) {
+                            if (res_json && res_json["status"] === true && res_json["data"] && res_json["data"]["click"] !== null && res_json["data"]["click"] !== undefined) {
                                 ilikeblackmen = Number(res_json["data"]["click"]);
                                 allowCatching = true;
                                 lastClick_save = 0;
                             } else {
                                 setTimeout(() => {
                                     fetch("https://backend-buttonfrenzy.codernocook.repl.co/getClick", { method: "POST", mode: 'cors', headers: { "Accept": "application/json", "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }, body: JSON.stringify({ "username": JSON.parse(document.cookie.split("cookie=")[1])["username"] }) }).then((res) => res.json()).then((res_json) => {
-                                        if (res_json && res_json["status"] === true && res_json["data"] && res_json["data"]["click"]) {
+                                        if (res_json && res_json["status"] === true && res_json["data"] && res_json["data"]["click"] !== null && res_json["data"]["click"] !== undefined) {
                                             ilikeblackmen = Number(res_json["data"]["click"]);
                                             allowCatching = true;
                                             lastClick_save = 0;
                                         } else {
                                             setTimeout(() => {
                                                 fetch("https://backend-buttonfrenzy.codernocook.repl.co/getClick", { method: "POST", mode: 'cors', headers: { "Accept": "application/json", "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }, body: JSON.stringify({ "username": JSON.parse(document.cookie.split("cookie=")[1])["username"] }) }).then((res) => res.json()).then((res_json) => {
-                                                    if (res_json && res_json["status"] === true && res_json["data"] && res_json["data"]["click"]) {
+                                                    if (res_json && res_json["status"] === true && res_json["data"] && res_json["data"]["click"] !== null && res_json["data"]["click"] !== undefined) {
                                                         ilikeblackmen = Number(res_json["data"]["click"]);
                                                         allowCatching = true;
                                                         lastClick_save = 0;
                                                     } else {
                                                         setTimeout(() => {
                                                             fetch("https://backend-buttonfrenzy.codernocook.repl.co/getClick", { method: "POST", mode: 'cors', headers: { "Accept": "application/json", "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }, body: JSON.stringify({ "username": JSON.parse(document.cookie.split("cookie=")[1])["username"] }) }).then((res) => res.json()).then((res_json) => {
-                                                                if (res_json && res_json["status"] === true && res_json["data"] && res_json["data"]["click"]) {
+                                                                if (res_json && res_json["status"] === true && res_json["data"] && res_json["data"]["click"] !== null && res_json["data"]["click"] !== undefined) {
                                                                     ilikeblackmen = Number(res_json["data"]["click"]);
                                                                     allowCatching = true;
                                                                     lastClick_save = 0;
                                                                 } else {
                                                                     setTimeout(() => {
                                                                         fetch("https://backend-buttonfrenzy.codernocook.repl.co/getClick", { method: "POST", mode: 'cors', headers: { "Accept": "application/json", "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }, body: JSON.stringify({ "username": JSON.parse(document.cookie.split("cookie=")[1])["username"] }) }).then((res) => res.json()).then((res_json) => {
-                                                                            if (res_json && res_json["status"] === true && res_json["data"] && res_json["data"]["click"]) {
+                                                                            if (res_json && res_json["status"] === true && res_json["data"] && res_json["data"]["click"] !== null && res_json["data"]["click"] !== undefined) {
                                                                                 ilikeblackmen = Number(res_json["data"]["click"]);
                                                                                 allowCatching = true;
                                                                                 lastClick_save = 0;
@@ -165,7 +165,7 @@ setTimeout(() => {
 // saving data function
 const savingData = function() {
     fetch("https://backend-buttonfrenzy.codernocook.repl.co/postClick", { method: "POST", mode: 'cors', headers: { "Accept": "application/json", "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }, body: JSON.stringify({ "username": JSON.parse(document.cookie.split("cookie=")[1])["username"], "cookie": JSON.parse(document.cookie.split("cookie=")[1])["loginCookie"], "clicked": lastClick_save }) }).then((res) => res.json()).then((res_json) => {
-        if (res_json && res_json["status"] === true && res_json["data"] && res_json["data"]["click"]) {
+        if (res_json && res_json["status"] === true && res_json["data"] && res_json["data"]["click"] !== null && res_json["data"]["click"] !== undefined) {
             ilikeblackmen = Number(res_json["data"]["click"]);
             if (document.getElementsByClassName("clickButton_gamePlay") && document.getElementsByClassName("clickButton")[0] && Number(ilikeblackmen)) {
                 document.getElementsByClassName("clickButton_gamePlay")[0].innerHTML = `click! | ${Number(res_json["data"]["click"])}`;
