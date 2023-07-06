@@ -5,6 +5,8 @@
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <title>Clicker Simulator</title>
 
+                <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+
                 <style>
                     body {
                         background-color: rgb(0, 0, 0);
@@ -42,11 +44,11 @@
                         top: 4.5%;
                         left: 50%;
                         transform: translate(-50%, -50%);
-                        font-family: sans-serif;
+                        font-family: Roboto;
                     }
 
-                    .white_bar {
-                        background-color: white;
+                    .black_bar {
+                        background-color: rgb(15, 15, 15);
                         position: absolute;
                         top: 16%;
                         left: 50%;
@@ -111,8 +113,8 @@
                     }
 
                     .submit_content {
-                        background-color: rgba(0, 255, 191, 0.511);
-                        color: black;
+                        background-color: rgb(20, 20, 20);
+                        color: rgb(255, 255, 255);
                         position: absolute;
                         top: 72%;
                         left: 50%;
@@ -125,12 +127,17 @@
                     }
 
                     .signin_href {
-                        color: white;
+                        color: rgb(150, 150, 150);
                         font-family: sans-serif;
                         position: absolute;
                         top: 90%;
                         left: 50%;
                         transform: translate(-50%, -50%);
+                        transition: background-color 0.3s ease;
+                    }
+
+                    .signin_href:hover {
+                        color: rgb(255, 255, 255)
                     }
                 </style>
 
@@ -158,6 +165,8 @@
                                         if (res_json && res_json["status"] === true && res_json["data"] && res_json["data"]["cookie"] && res_json["data"]["username"]) {
                                             document.cookie = `cookie=${JSON.stringify({ "WARNING_DO_NOT_COPY_OR_SHARE_THESE_TO_OTHERS_OR_ELSE_YOUR_ACCOUNT_WILL_GET_HACKED_BECAREFUL_YOU_MAY_GIVE_ATTACKER_ACCESS_TO_YOUR_ACCOUNT": 0, "username": res_json["data"]["username"], "loginCookie": atob(res_json["data"]["cookie"]) })}`
                                             window.location.href = "/game.html";
+                                        } else {
+                                            location.reload();
                                         }
                                     })
                                 }
@@ -171,11 +180,11 @@
                             if (document.getElementsByClassName("h-captcha") && document.getElementsByClassName("h-captcha")[0]) {
                                 if (document.getElementsByClassName("h-captcha")[0].children[0].getAttribute("data-hcaptcha-response") === "") {
                                     if (document.getElementsByClassName("submit_content")[0]) {
-                                        document.getElementsByClassName("submit_content")[0].style.background = "rgba(0, 255, 191, 0.511)"
+                                        document.getElementsByClassName("submit_content")[0].style.background = "rgb(20, 20, 20)"
                                     }
                                 } else if (document.getElementsByClassName("h-captcha")[0].children[0].getAttribute("data-hcaptcha-response") !== "") {
                                     if (document.getElementsByClassName("submit_content")[0]) {
-                                        document.getElementsByClassName("submit_content")[0].style.background = "rgb(0, 255, 191)"
+                                        document.getElementsByClassName("submit_content")[0].style.background = "rgba(0, 255, 191, 0.938)"
                                     }
                                 }
                             }
@@ -214,7 +223,7 @@
             <body>
                 <div class="loginbg">
                     <h1 class="signup_text">Sign up</h1>
-                    <div class="white_bar"></div>
+                    <div class="black_bar"></div>
 
                     <input class="username_box" type="text"      placeholder="   username"></input>
                     <input class="email_box"    type="text"      placeholder="   email"></input>
